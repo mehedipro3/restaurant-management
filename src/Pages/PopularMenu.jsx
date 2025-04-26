@@ -4,7 +4,7 @@ import MenuItems from '../Share/MenuItems/MenuItems';
 
 const PopularMenu = () => {
   const [menu, setMenu ] = useState([]);
-  console.log(menu);
+  
 
   useEffect(() => {
     fetch('menu.json')
@@ -21,7 +21,7 @@ const PopularMenu = () => {
         heading={"FROM OUR MENU"}
       ></SectionTitle>
 
-      <div className='grid md:grid-cols-2 gap-4'>
+      <div className='grid md:grid-cols-2 gap-4 space-y-5'>
         {
           menu.map(item => <MenuItems
             key={item._id}
@@ -29,7 +29,9 @@ const PopularMenu = () => {
           ></MenuItems>)
         }
       </div>
-
+      <div className='text-center'>
+      <button className="btn btn-outline border-0 border-b-4 mt-4 ">View Full Menu</button>
+      </div>
     </div>
   );
 };
