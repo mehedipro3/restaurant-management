@@ -5,10 +5,16 @@ import ChefServ from './ChefServ';
 import PopularMenu from './PopularMenu';
 import Feature from './Feature/Feature';
 import Testimonial from './Testimonial/Testimonial';
+import { Helmet } from 'react-helmet-async';
 
 const Homes = () => {
   return (
     <div>
+
+      <Helmet>
+        <title>Bistro | Home</title>
+      </Helmet>
+
       <Banner></Banner>
       <Category></Category>
       <ChefServ></ChefServ>
