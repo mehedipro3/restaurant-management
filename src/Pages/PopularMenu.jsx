@@ -2,9 +2,9 @@ import SectionTitle from '../SectionTitle/SectionTitle';
 import MenuItems from '../Share/MenuItems/MenuItems';
 import useMenu from '../hooks/useMenu'
 const PopularMenu = () => {
-const [menu] = useMenu();
+  const [menu] = useMenu();
 
-const popular = menu.filter(item => item.category === 'popular')
+  const popular = menu.filter(item => item.category === 'popular')
 
   // const [menu, setMenu ] = useState([]);
   // useEffect(() => {
@@ -31,7 +31,7 @@ const popular = menu.filter(item => item.category === 'popular')
         }
       </div>
       <div className='text-center'>
-      <button className="btn btn-outline border-0 border-b-4 mt-4 ">View Full Menu</button>
+        <button className="btn btn-outline border-0 border-b-4 mt-4 ">View Full Menu</button>
       </div>
     </div>
   );
