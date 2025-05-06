@@ -5,10 +5,14 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import useMenu from '../../hooks/useMenu';
 import OrderTab from './OrderTab';
+import { useParams } from 'react-router';
 
 
 const Order = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const categories = ['salad', 'pizza' , 'soup' , 'dessert' , 'drinks'];
+  const {category} = useParams();
+  const initialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
 
   const [menu] = useMenu();
   const salad = menu.filter(item => item.category === 'salad');
@@ -17,7 +21,7 @@ const Order = () => {
   const desserts = menu.filter(item => item.category === 'dessert');
   const soup = menu.filter(item => item.category === 'soup');
 
-  
+
   return (
     <div>
       <Cover img={OrderCoverImg} title={'Our Order'} subTitle={'Would you like to try a dish?'}></Cover>
@@ -34,16 +38,16 @@ const Order = () => {
           <OrderTab items={salad}></OrderTab>
         </TabPanel>
         <TabPanel>
-        <OrderTab items={pizzas}></OrderTab>
+          <OrderTab items={pizzas}></OrderTab>
         </TabPanel>
         <TabPanel>
-        <OrderTab items={soup}></OrderTab>
+          <OrderTab items={soup}></OrderTab>
         </TabPanel>
         <TabPanel>
-        <OrderTab items={desserts}></OrderTab>
+          <OrderTab items={desserts}></OrderTab>
         </TabPanel>
         <TabPanel>
-        <OrderTab items={drinks}></OrderTab>
+          <OrderTab items={drinks}></OrderTab>
         </TabPanel>
       </Tabs>
 
