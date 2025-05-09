@@ -1,16 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router';
-
+import {NavLink } from 'react-router';
+import './NavBar.css';
 const NavBar = () => {
   const navOption =
     <>
-      <li><Link to={"/"}>Home</Link></li>
-      <li><Link to={"/menu"}>Our Menu</Link></li>
-      <li><Link to={"/order"}>Order</Link></li>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+        >
+          Home
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          to="/menu"
+          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+        >
+          Our Menu
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          to="/order/salad"
+          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+        >
+          Order
+        </NavLink>
+      </li>
+
     </>
   return (
     <>
-      <div className="navbar bg-gray-300 fixed z-10 max-w-screen-xl bg-opacity-30 text-white">
+      <div className="navbar bg-black/30 fixed z-10 max-w-screen-xl text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -19,14 +43,14 @@ const NavBar = () => {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                  {navOption}
+              {navOption}
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">Bistro Boss</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-           {navOption}
+            {navOption}
           </ul>
         </div>
         <div className="navbar-end">
