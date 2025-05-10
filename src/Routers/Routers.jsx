@@ -6,6 +6,7 @@ import Homes from "../Pages/Homes.jsx";
 import Menu from "../Pages/Menu/Menu.jsx";
 import Order from "../Pages/Order/Order.jsx";
 import Login from "../Pages/login/Login.jsx";
+import SingUp from "../Pages/SingUp/SingUp.jsx";
 
 
 
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>
+      },
+      {
+        path: "/singUp",
+        element: <SingUp></SingUp>
       }
 
     ]
