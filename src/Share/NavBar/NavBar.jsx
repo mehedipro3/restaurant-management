@@ -1,7 +1,11 @@
-import React from 'react';
-import {NavLink } from 'react-router';
+import React, { useContext } from 'react';
+import { Link, NavLink } from 'react-router';
 import './NavBar.css';
+import { AuthContext } from '../../Provider/AuthProvider';
 const NavBar = () => {
+
+  const { user, logOut } = useContext(AuthContext);
+
   const navOption =
     <>
       <li>
@@ -30,17 +34,14 @@ const NavBar = () => {
           Order
         </NavLink>
       </li>
-
-      <li>
-        <NavLink
-          to="/login"
-          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-        >
-          Login
-        </NavLink>
-      </li>
-
     </>
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => { })
+      .then(error => console.log(error))
+  }
+
   return (
     <>
       <div className="navbar bg-black/30 fixed z-10 max-w-screen-xl text-white">
@@ -63,7 +64,16 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {
+            user ?
+              <>
+                <button className="btn btn-ghost" onClick={handleLogout}>Log Out</button>
+              </>
+              :
+              <>
+                <button><Link to="/login" className="nav-link"> Login</Link></button>
+              </>
+          }
         </div>
       </div>
     </>

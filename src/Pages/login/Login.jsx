@@ -1,11 +1,12 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Link } from 'react-router';
+import { Helmet } from 'react-helmet';
+import Swal from 'sweetalert2';
 
 const Login = () => {
   const { SingIn } = useContext(AuthContext);
-  const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
@@ -13,8 +14,8 @@ const Login = () => {
 
   }, [])
 
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
 
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
@@ -27,13 +28,22 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    SingIn(email,password)
-    .then(result=>{
-      console.log(result.user);
-    })
+    SingIn(email, password)
+      .then(result => {
+        Swal.fire({
+          title: "User LogIn Successfully",
+          icon: "success",
+          draggable: true
+        });
+        console.log(result.user);
+      })
+
   }
   return (
-    <div>
+    <>
+      <Helmet>
+        <title>Bistro Boss | Login </title>
+      </Helmet>
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center md:w-1/2 lg:text-left">
@@ -52,8 +62,7 @@ const Login = () => {
                 <input type="password" name="password" className="input" placeholder="Password" />
                 <div><a className="link link-hover">Forgot password?</a></div>
                 <LoadCanvasTemplate />
-                <input type="text" ref={captchaRef} name="captcha" className="input" placeholder="Type the captcha" />
-                <button onClick={handleValidateCaptcha} className='btn btn-outline btn-primary btn-xs mt-2'>Validate</button>
+                <input type="text" onBlur={handleValidateCaptcha} name="captcha" className="input" placeholder="Type the captcha" />
                 <input disabled={disabled} className="btn btn-neutral mt-4" type="submit" value="Login" />
               </fieldset>
             </form>
@@ -61,7 +70,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
