@@ -68,7 +68,7 @@ const Login = () => {
                 <div><a className="link link-hover">Forgot password?</a></div>
                 <LoadCanvasTemplate />
                 <input type="text" onBlur={handleValidateCaptcha} name="captcha" className="input" placeholder="Type the captcha" />
-                <input disabled={disabled} className="btn btn-neutral mt-4" type="submit" value="Login" />
+                <input disabled={false} className="btn btn-neutral mt-4" type="submit" value="Login" />
               </fieldset>
             </form>
             <p className='text-center my-1'>New Here? <Link to={"/singUp"}>Create an Account</Link> </p>
