@@ -3,10 +3,11 @@ import { Link, NavLink } from 'react-router';
 import './NavBar.css';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { FaShoppingCart } from 'react-icons/fa';
+import useCart from '../../hooks/useCart';
 const NavBar = () => {
 
   const { user, logOut } = useContext(AuthContext);
-
+  const [cart] = useCart();
   const navOption =
     <>
       <li>
@@ -37,9 +38,9 @@ const NavBar = () => {
       </li>
 
       <li>
-        <Link to={'/'}>
+        <Link to={"/dashboard/cart"}>
           <button className='flex items-center '>
-            <FaShoppingCart className='mr-2'></FaShoppingCart> <div className="badge badge-sm badge-secondary">+0</div>
+            <FaShoppingCart className='mr-2'></FaShoppingCart> <div className="badge badge-sm badge-secondary">+{cart.length}</div>
           </button>
         </Link>
       </li>

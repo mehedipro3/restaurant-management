@@ -7,6 +7,9 @@ import Menu from "../Pages/Menu/Menu.jsx";
 import Order from "../Pages/Order/Order.jsx";
 import Login from "../Pages/login/Login.jsx";
 import SingUp from "../Pages/SingUp/SingUp.jsx";
+import Cart from "../Pages/Dashboard/Cart/Cart.jsx";
+import DashBoard from "../Layout/DashBoard.jsx";
+
 
 
 
@@ -16,7 +19,7 @@ export const router = createBrowserRouter([
     path: "/",
     element: <Main></Main>,
     errorElement: <h2>error page</h2>,
-    children:[
+    children: [
       {
         path: "/",
         element: <Homes></Homes>
@@ -37,6 +40,17 @@ export const router = createBrowserRouter([
         path: "/singUp",
         element: <SingUp></SingUp>
       }
+
+    ]
+  },
+  {
+    path: "dashboard",
+    element: <DashBoard></DashBoard>,
+    children: [
+      {
+        path: "cart",
+        element: <Cart></Cart>
+      },
 
     ]
   },
