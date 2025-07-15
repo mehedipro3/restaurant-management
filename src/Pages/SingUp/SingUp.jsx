@@ -1,13 +1,17 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import SocialLogin from "../../component/FoodCard/SocialLogin";
 
 const SingUp = () => {
 
-  const {CreateUser} = useContext(AuthContext);
-
+  const axiosPublic = useAxiosPublic();
+  const { CreateUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,10 +21,34 @@ const SingUp = () => {
 
   const onSubmit = (data) => {
 
-    CreateUser(data.email , data.password)
-    .then(result=>{
-      console.log(result.user);
-    })
+    CreateUser(data.email, data.password)
+      .then(result => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        updateUserProfile(data.name)
+          .then(() => {
+            // create user entry in the database
+            const userInfo = {
+              name: data.name,
+              email: data.email
+            }
+            axiosPublic.post('/users', userInfo)
+              .then((res) => {
+                if (res.data.insertedId) {
+                  console.log('user added to the database')
+
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Your are successfully login",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  navigate('/')
+                }
+              })
+          })
+      })
 
   };
 
@@ -69,8 +97,10 @@ const SingUp = () => {
               </fieldset>
             </form>
             <p className="text-center mb-2">Already registered?  <Link to={'/login'}> Go to log in</Link></p>
+            <SocialLogin ></SocialLogin>
           </div>
         </div>
+        
       </div>
     </>
   );

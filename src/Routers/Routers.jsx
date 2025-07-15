@@ -9,7 +9,7 @@ import Login from "../Pages/login/Login.jsx";
 import SingUp from "../Pages/SingUp/SingUp.jsx";
 import Cart from "../Pages/Dashboard/Cart/Cart.jsx";
 import DashBoard from "../Layout/DashBoard.jsx";
-
+import PrivateRouter from "../Routers/PrivateRouter.jsx"
 
 
 
@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashBoard></DashBoard>,
+    element: <PrivateRouter><DashBoard></DashBoard></PrivateRouter>,
     children: [
       {
         path: "cart",

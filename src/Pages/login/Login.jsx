@@ -4,6 +4,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../component/FoodCard/SocialLogin';
 
 const Login = () => {
   const { SingIn } = useContext(AuthContext);
@@ -41,7 +42,7 @@ const Login = () => {
         console.log(result.user);
       });
 
-      navigate(from , {replace : true});
+    navigate(from, { replace: true });
 
   }
   return (
@@ -71,7 +72,10 @@ const Login = () => {
                 <input disabled={false} className="btn btn-neutral mt-4" type="submit" value="Login" />
               </fieldset>
             </form>
-            <p className='text-center my-1'>New Here? <Link to={"/singUp"}>Create an Account</Link> </p>
+            <p className='text-center my-1'>New Here? <Link to={"/singUp"}>Create an Account</Link>
+
+              <SocialLogin></SocialLogin>
+            </p>
           </div>
         </div>
       </div>
