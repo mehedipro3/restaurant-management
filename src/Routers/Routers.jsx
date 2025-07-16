@@ -10,6 +10,7 @@ import SingUp from "../Pages/SingUp/SingUp.jsx";
 import Cart from "../Pages/Dashboard/Cart/Cart.jsx";
 import DashBoard from "../Layout/DashBoard.jsx";
 import PrivateRouter from "../Routers/PrivateRouter.jsx"
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers.jsx";
 
 
 
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart></Cart>
+      },
+      {
+        path: "Users",
+        element: <AllUsers></AllUsers>
       },
 
     ]
