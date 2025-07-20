@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
           })
       }
       else {
-        //TODO : remove token
+        // remove token
         localStorage.removeItem('Access-Token');
       }
       setLoading(false);
@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
         return unsubscribe();
       }
     })
-  }, [])
+  }, [axiosPublic])
 
 
 

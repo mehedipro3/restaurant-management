@@ -2,9 +2,14 @@ import { FaAd, FaCalendar, FaHome, FaList, FaSearch, FaShoppingCart, FaUser, FaU
 import { NavLink, Outlet } from "react-router";
 import useCart from "../hooks/useCart";
 import { FiCheckSquare } from "react-icons/fi";
+import useAdmin from "../hooks/useAdmin";
+
+
 const DashBoard = () => {
   const [cart] = useCart();
-  const isAdmin = true;
+
+  const [isAdmin] = useAdmin();
+
   return (
     <div className="flex">
       <div className="w-64 min-h-screen bg-orange-400">
@@ -32,7 +37,7 @@ const DashBoard = () => {
               </li>
               <li>
                 <NavLink to='/dashboard/manageBooking'>
-                  <FiCheckSquare  />
+                  <FiCheckSquare />
                   Manage Booking
                 </NavLink>
               </li>
