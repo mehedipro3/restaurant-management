@@ -11,6 +11,8 @@ import Cart from "../Pages/Dashboard/Cart/Cart.jsx";
 import DashBoard from "../Layout/DashBoard.jsx";
 import PrivateRouter from "../Routers/PrivateRouter.jsx"
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers.jsx";
+import AddItems from "../Pages/Dashboard/AddItems/AddItems.jsx";
+import AdminRouter from "./AdminRouter.jsx";
 
 
 
@@ -48,13 +50,21 @@ export const router = createBrowserRouter([
     path: "dashboard",
     element: <PrivateRouter><DashBoard></DashBoard></PrivateRouter>,
     children: [
+      //user panel routes
       {
         path: "cart",
         element: <Cart></Cart>
       },
+
+      //admin panel routes
+
       {
         path: "Users",
         element: <AllUsers></AllUsers>
+      },
+      {
+        path: "addItems",
+        element:<AddItems></AddItems>
       },
 
     ]

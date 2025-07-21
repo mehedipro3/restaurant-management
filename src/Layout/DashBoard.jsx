@@ -16,39 +16,7 @@ const DashBoard = () => {
         <ul className="menu p-4">
 
           {
-            isAdmin ? <>
-              <li>
-                <NavLink to='/dashboard/adminHome'>
-                  <FaHome></FaHome>
-                  Admin Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='/dashboard/addItems'>
-                  <FaUtensils></FaUtensils>
-                  Add Items
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='/dashboard/manageItems'>
-                  <FaList></FaList>
-                  Manage Items
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='/dashboard/manageBooking'>
-                  <FiCheckSquare />
-                  Manage Booking
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to='/dashboard/users'>
-                  <FaUser></FaUser>
-                  All Users
-                </NavLink>
-              </li>
-            </>
-              :
+            isAdmin ? 
               <>
                 <li>
                   <NavLink to='/dashboard/userHome'>
@@ -81,6 +49,39 @@ const DashBoard = () => {
                   </NavLink>
                 </li>
               </>
+              :
+              <>
+              <li>
+                <NavLink to='/dashboard/adminHome'>
+                  <FaHome></FaHome>
+                  Admin Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/dashboard/addItems'>
+                  <FaUtensils></FaUtensils>
+                  Add Items
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/dashboard/manageItems'>
+                  <FaList></FaList>
+                  Manage Items
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/dashboard/manageBooking'>
+                  <FiCheckSquare />
+                  Manage Booking
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/dashboard/users'>
+                  <FaUser></FaUser>
+                  All Users
+                </NavLink>
+              </li>
+            </>
           }
           <div className="divider"></div>
           {/* shared part */}
