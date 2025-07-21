@@ -12,7 +12,7 @@ const DashBoard = () => {
 
   return (
     <div className="flex">
-      <div className="w-64 min-h-screen bg-orange-400">
+      <div className="w-64 min-h-screen bg-red-300">
         <ul className="menu p-4">
 
           {
