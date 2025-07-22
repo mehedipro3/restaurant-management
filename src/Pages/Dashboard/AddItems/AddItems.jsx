@@ -1,13 +1,24 @@
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../../SectionTitle/SectionTitle";
 import { FaUtensils } from "react-icons/fa";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
+const img_hosting_key = import.meta.env.VITE_IMAGE_KEY;
+const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
 
 const AddItems = () => {
-
+  const axiosPublic = useAxiosPublic();
   const { register, handleSubmit } = useForm();
-  const onSubmit = data => {
+  
+  const onSubmit = async (data) => {
     console.log(data)
+    const imageFile = { image: data.image[0] };
+    const res = await axiosPublic.post(img_hosting_api, imageFile, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    });
+    console.log(res.data);
 
   };
 
@@ -19,20 +30,20 @@ const AddItems = () => {
           <fieldset className="fieldset ">
             <legend className="fieldset-legend ">Recipe Name*</legend>
             <input
-              {...register("name")}
+              {...register("name", { required: true })}
               type="text"
-              className="input w-full my-6"
+              className="input w-full my-3"
               placeholder="Recipe Name" />
           </fieldset>
 
           <div className="grid grid-cols-2 items-center gap-6">
-            {/* category */}
-
+            {/* Category */}
             <fieldset className="fieldset">
-              <legend className="fieldset-legend ">Category*</legend>
-              <select {...register("category")}
-                defaultValue={'Select a Category '} className="select w-full">
-                <option >Salad</option>
+              <legend className="fieldset-legend">Category*</legend>
+              <select defaultValue={'default'} {...register("category", { required: true })} className="select w-full"
+              >
+                <option disabled value={'default'}>Select a Category </option>
+                <option>Salad</option>
                 <option>Pizza</option>
                 <option>Soup</option>
                 <option>Dessert</option>
@@ -40,25 +51,26 @@ const AddItems = () => {
               </select>
             </fieldset>
 
-            {/* price */}
-
-            <fieldset className="fieldset ">
-              <legend className="fieldset-legend ">Price*</legend>
+            {/* Price */}
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">Price*</legend>
               <input
-                {...register("price")}
+                {...register("price", { required: true })}
                 type="number"
-                className="input my-6 w-full"
-                placeholder="Price" />
+                className="input w-full"
+                placeholder="Price"
+              />
             </fieldset>
           </div>
 
+
           <fieldset className="fieldset">
             <legend className="fieldset-legend">Recipe Details*</legend>
-            <textarea {...register('recipe')} className="textarea h-24 w-full" placeholder="Recipe Details"></textarea>
+            <textarea {...register('recipe', { required: true })} className="textarea h-24 w-full" placeholder="Recipe Details"></textarea>
           </fieldset>
 
           <div className="my-5">
-            <input {...register('image')} type="file" className="file-input file-input-ghost" />
+            <input {...register('image', { required: true })} type="file" className="file-input file-input-ghost" />
           </div>
           <button className="btn bg-red-400" >
             Add Items <FaUtensils></FaUtensils>
