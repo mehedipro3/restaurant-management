@@ -13,6 +13,7 @@ import PrivateRouter from "../Routers/PrivateRouter.jsx"
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers.jsx";
 import AddItems from "../Pages/Dashboard/AddItems/AddItems.jsx";
 import AdminRouter from "./AdminRouter.jsx";
+import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems.jsx";
 
 
 
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: "addItems",
         element:<AddItems></AddItems>
+      },
+      {
+        path: "manageItems",
+        element:<ManageItems></ManageItems>
       },
 
     ]
