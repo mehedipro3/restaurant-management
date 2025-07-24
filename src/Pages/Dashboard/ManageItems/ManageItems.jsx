@@ -4,10 +4,11 @@ import SectionTitle from "../../../SectionTitle/SectionTitle";
 import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router";
 
 
 const ManageItems = () => {
-  const [menu, ,refetch] = useMenu();
+  const [menu, , refetch] = useMenu();
   const axiosSecure = useAxiosSecure();
 
   const handleDeleteItem = id => {
@@ -22,7 +23,7 @@ const ManageItems = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosSecure.delete(`/menu/${id}`);
-       // console.log(res.data);
+        // console.log(res.data);
         if (res.data.deletedCount > 0) {
           refetch();
           Swal.fire({
@@ -80,10 +81,11 @@ const ManageItems = () => {
                   ${item.price}
                 </td>
                 <td>
-                  <button
-                    //onClick={() => handleMakeAdmin(user)}
-                    className="btn btn-sm bg-red-500 text-2xl"> <FaEdit className="text-white"></FaEdit>
-                  </button>
+                  <Link to={`/dashboard/updateItem/${item._id}`}>
+                    <button
+                      className="btn btn-sm bg-red-500 text-2xl"> <FaEdit className="text-white"></FaEdit>
+                    </button>
+                  </Link>
                 </td>
                 <td>
                   <button
