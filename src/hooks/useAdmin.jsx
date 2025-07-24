@@ -5,7 +5,7 @@ import useAxiosSecure from './useAxiosSecure';
 
 
 const useAdmin = () => {
-  const { user , loading} = useAuth();
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAdminPending, setIsAdminPending] = useState(true);
@@ -18,12 +18,12 @@ const useAdmin = () => {
   //     res.send(res.data?.admin)
   //   }
   // });
-  console.log("AdminRouter Debug:", {
-    user,
-    loading,
-    isAdmin,
-    isAdminPending
-  });
+  // console.log("AdminRouter Debug:", {
+  //   user,
+  //   loading,
+  //   isAdmin,
+  //   isAdminPending
+  // });
 
   useEffect(() => {
     if (user?.email) {
