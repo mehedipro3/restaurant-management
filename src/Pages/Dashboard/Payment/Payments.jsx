@@ -1,10 +1,11 @@
 import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import SectionTitle from '../../../SectionTitle/SectionTitle';
-import { Elements } from '@stripe/stripe-js';
+import CheckOutForm from './CheckOutForm';
 
 
 
-const stripePromise = loadStripe('');
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
 const Payments = () => {
   return (
@@ -12,8 +13,7 @@ const Payments = () => {
       <SectionTitle heading={'Payment'} subHeading={'Please check your money'}></SectionTitle>
 
       <Elements stripe={stripePromise}>
-
-
+        <CheckOutForm></CheckOutForm>
       </Elements>
     </div>
   );
