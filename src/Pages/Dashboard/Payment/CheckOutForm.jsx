@@ -2,6 +2,7 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useCart from '../../../hooks/useCart';
+import useAuth from '../../../hooks/useAuth';
 
 
 const CheckOutForm = () => {
@@ -11,6 +12,7 @@ const CheckOutForm = () => {
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const [cart] = useCart();
+  const {user} = useAuth();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
 
@@ -47,6 +49,24 @@ const CheckOutForm = () => {
     else {
       console.log("PAYMENT METHOD : ", paymentMethod);
       setError('')
+    }
+
+ const {paymentIntent , error : confirmError} = await stripe.confirmCardPayment(clientSecret , {
+      paymentMethod : {
+        card : card,
+        billing_details:{
+            user : user?.email,
+            name : name?.name
+        }
+      }
+    })
+
+    if(error){
+      console.log('confirm error');
+    }
+    else{
+      console.log('paymentIntent error' , paymentIntent);
+      
     }
   };
 
