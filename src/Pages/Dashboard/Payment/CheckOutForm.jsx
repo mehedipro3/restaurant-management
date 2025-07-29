@@ -12,8 +12,8 @@ const CheckOutForm = () => {
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const [cart] = useCart();
-  const {user} = useAuth();
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+  const { user } = useAuth();
+  const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price), 0);
 
 
   useEffect(() => {
@@ -51,22 +51,29 @@ const CheckOutForm = () => {
       setError('')
     }
 
- const {paymentIntent , error : confirmError} = await stripe.confirmCardPayment(clientSecret , {
-      paymentMethod : {
-        card : card,
-        billing_details:{
-            user : user?.email,
-            name : name?.name
+    if (!clientSecret) {
+      console.error('No client secret available!');
+      return;
+    }
+
+    // confirm payment
+    const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: card,
+        billing_details: {
+          name: user?.displayName || 'anonymous',
+          email: user?.email || 'anonymous',
         }
       }
     })
 
-    if(error){
+    if (confirmError) {
       console.log('confirm error');
     }
-    else{
-      console.log('paymentIntent error' , paymentIntent);
-      
+    else {
+      console.log('paymentIntent error', paymentIntent);
+
+
     }
   };
 
@@ -89,7 +96,7 @@ const CheckOutForm = () => {
           },
         }}
       />
-      <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || !clientSecret}>
+      <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe}>
         Pay
       </button>
       <p className='text-red-600'>{error}</p>
