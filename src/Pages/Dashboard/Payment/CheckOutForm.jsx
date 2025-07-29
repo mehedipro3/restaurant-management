@@ -8,6 +8,7 @@ import useAuth from '../../../hooks/useAuth';
 const CheckOutForm = () => {
   const [error, setError] = useState('');
   const [clientSecret, setClientSecret] = useState('');
+  const [transactionId, setTransactionId] = useState('');
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
@@ -71,9 +72,25 @@ const CheckOutForm = () => {
       console.log('confirm error');
     }
     else {
-      console.log('paymentIntent error', paymentIntent);
+      console.log('paymentIntent Intent ', paymentIntent);
+      if (paymentIntent.status === 'succeeded') {
+        console.log('transaction Id ', paymentIntent.id);
+        setTransactionId(paymentIntent.id);
 
+        //now save the payment in the database
+        const payment = {
+          email: user.email,
+          price: totalPrice,
+          date: new Date(),
+          transactionId: paymentIntent.id,
+          cartIds: cart.map(item => item._id),
+          menuItemIds: cart.map(item => item.menuId),
+          status: 'pending'
+        }
+        const res = await axiosSecure.post('/payments', payment);
+        console.log('payment saved : ', res);
 
+      }
     }
   };
 
@@ -100,6 +117,7 @@ const CheckOutForm = () => {
         Pay
       </button>
       <p className='text-red-600'>{error}</p>
+      {transactionId && <p className='text-green-400'>Your Transaction ID : {transactionId}</p>}
     </form>
   );
 };
