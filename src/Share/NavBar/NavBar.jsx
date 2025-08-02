@@ -4,9 +4,11 @@ import './NavBar.css';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { FaShoppingCart } from 'react-icons/fa';
 import useCart from '../../hooks/useCart';
+import useAdmin from '../../hooks/useAdmin';
 const NavBar = () => {
 
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [cart] = useCart();
   const navOption =
     <>
@@ -36,6 +38,26 @@ const NavBar = () => {
           Order
         </NavLink>
       </li>
+      {
+        user && isAdmin && <li>
+          <NavLink
+            to="/dashboard/adminHome"
+            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+          >
+            Admin Home
+          </NavLink>
+        </li>
+      }
+      {
+        user && !isAdmin && <li>
+          <NavLink
+            to="/dashboard/userHome"
+            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+          >
+            User Home
+          </NavLink>
+        </li>
+      }
 
       <li>
         <Link to={"/dashboard/cart"}>
@@ -44,6 +66,7 @@ const NavBar = () => {
           </button>
         </Link>
       </li>
+
     </>
 
   const handleLogout = () => {
