@@ -1,6 +1,6 @@
 # Restaurant Management System 🍽️
 
-Live Demo: [restaurant-management-c9712.web.app/dashboard/userHome](https://restaurant-management-c9712.web.app/dashboard/userHome)
+Live Demo: [restaurant-management-c9712.web.app](https://restaurant-management-c9712.web.app/)
 
 ---
 
