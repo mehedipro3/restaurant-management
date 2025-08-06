@@ -10,7 +10,7 @@ const useMenu = () => {
   // const [loading, setLoading] = useState([]);
 
   // useEffect(() => {
-  //   fetch('http://localhost:5000/menu')
+  //   fetch('https://restaurant-management-server-7ne1m155w.vercel.app/menu')
   //     .then(res => res.json())
   //     .then(data => {
   //       setMenu(data);
